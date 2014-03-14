@@ -1,8 +1,8 @@
 ## Variable that points to SystemC installation path
-SYSTEMC = /apps/systemc22
+SYSTEMC = ${SYSTEMC_HOME}
 
 ## edit this to gccsparcOS5 for solaris
-TARGET_ARCH = linux
+# TARGET_ARCH = ${SYSTEMC_LIB}
 
 CC     = g++  
 OPT    = -O0
@@ -11,7 +11,7 @@ DEBUG  = -g
 SYSDIR = -I $(SYSTEMC)/include
           
 INCDIR = -I. -I.. $(SYSDIR)
-LIBDIR = -L. -L.. -L$(SYSTEMC)/lib-$(TARGET_ARCH)
+LIBDIR = -L. -L.. -L$(SYSTEMC)/${SYSTEMC_LIB}
 
 ## Build with maximum gcc warning level
 CFLAGS = -Wall -Wno-deprecated -Wno-return-type -Wno-char-subscripts $(DEBUG) $(OPT) $(EXTRACFLAGS)
@@ -22,7 +22,7 @@ EXE    = $(MODULE).x
 
 .PHONY: clean 
 
-$(EXE): $(OBJS) $(SYSTEMC)/lib-$(TARGET_ARCH)/libsystemc.a 
+$(EXE): $(OBJS) $(SYSTEMC)/${SYSTEMC_LIB}/libsystemc.a 
 	$(CC) $(CFLAGS) $(INCDIR) $(LIBDIR) -o $@ $(OBJS) $(LIBS) 2>&1 | c++filt
 
 ## based on http://www.paulandlesley.org/gmake/autodep.html
