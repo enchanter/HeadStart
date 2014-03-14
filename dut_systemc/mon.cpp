@@ -10,14 +10,14 @@ void Mon::action()
 {
 
   // write header
-  cout << setw(4)  << "a"
-    << setw(4)  << "b"
-    << setw(4)  << "c" << endl;
+  cout << setw(4) << "a"
+       << setw(4) << "b"
+       << setw(4) << "c" << endl;
 
   for (;;) {
     wait();                             // wait for 1 clock cycle
-    cout << setw(4)  << a.read().to_int()
-      << setw(4)  << b.read().to_int()
-      << setw(4)  << c.read().to_int() << endl;
+    cout << setw(4) << a.read().to_int()
+         << setw(4) << b.read().to_int()
+         << setw(4) << c.read().to_int() << endl;
   }
 }
