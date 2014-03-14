@@ -28,10 +28,12 @@ $(EXE): $(OBJS) $(SYSTEMC)/${SYSTEMC_LIB}/libsystemc.a
 ## based on http://www.paulandlesley.org/gmake/autodep.html
 %.o : %.cpp
 	$(CC) $(CFLAGS) $(INCDIR) -c -MMD -o $@ $<
-	@cp $*.d $*.P; \
-	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
-	-e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
-	rm -f $*.d
+	@sed 's/\($*\)\.o[ :]*/\1.o $*.P : /g' < $*.d > $*.P; \
+	rm -f $*.d; [ -s $@ ] || rm -f $@
+#	@cp $*.d $*.P; \
+#	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
+#	-e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
+#	rm -f $*.d
 
 
 clean:
