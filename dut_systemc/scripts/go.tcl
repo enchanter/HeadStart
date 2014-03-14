@@ -1,8 +1,7 @@
 set cppfilelist [list ../main.cpp  ../mon.cpp ../stim.cpp ../adder.cpp ../multiplier.cpp]
 
 puts {creating working library...}
-vlib lib
-vmap work lib
+vlib work
 
 
 puts {compiling with no optimisation and debugging enabled...}
